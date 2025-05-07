@@ -4,9 +4,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import LogoutButton from "./LogoutButton";
+import { getUser } from "@/auth/server";
 
-const Header = () => {
-  const user = null;
+const Header = async () => {
+  const user = await getUser();
   return (
     <header
       className="relative flex h-24 w-full items-center justify-between bg-popover px-3 sm:px-8"
