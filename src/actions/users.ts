@@ -37,12 +37,18 @@ export const signupAction = async (email: string, password: string) => {
   try {
     const { auth } = await createClient();
 
-    const { error } = await auth.signInWithPassword({
+    const { data, error } = await auth.signUp({
       email,
       password,
     });
 
     if (error) throw error;
+
+    const userId  = data.user?.id;
+
+    if (!userId) {
+        throw new Error("error in signup");
+    }
 
     return { errorMessage: null };
   } catch (error) {
